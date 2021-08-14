@@ -9,16 +9,42 @@ Project byte_web_monitor {
   '''
 }
 
-Table log {
+Table device {
   uid String pk ['选择']
   app_id String
-  deviceType String
+  device_type String
   OS String
-  OSVersion INTEGER
-  screenHeight String
-  screenWidth String
+  OS_version INTEGER
+  screen_height String
+  screen_width String
+  network String
+  orientation String ['横屏竖屏']
   language String
+  browser_info String
   url_path String
+}
+
+Table performance {
+  uid String pk 
+  app_id String
+  url String ['性能测试的url']
+  redirect_time INTEGER ['重定向时间']
+  dns_time INTEGER ['DNS查询时间']
+  ttfb_time INTEGER ['开始读取内容时间']
+  req_time INTEGER ['内容加载完成时间']
+  load_page_time INTEGER  ['总时间']
+}
+
+Table log {
+  uid String pk 
+  app_id String
+  url String
+  type String ['错误类型']
+
+  error_info String ['错误信息'] 
+  error_url String ['错误源']
+  error_row INTEGER ['代码行号(如果有)']
+  error_col INTEGER ['代码列号(如果有)']
 }
 
 
