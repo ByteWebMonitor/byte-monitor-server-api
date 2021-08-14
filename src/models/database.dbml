@@ -1,0 +1,46 @@
+//// -- LEVEL 1
+//// -- Tables and References
+// Creating tables
+
+// https://dbdiagram.io/d/6073abcbecb54e10c33fc45b
+Project byte_web_monitor {
+  database_type: 'Tablestore'
+  Note: '''
+  '''
+}
+
+Table log {
+  uid String pk ['选择']
+  app_id String
+  deviceType String
+  OS String
+  OSVersion INTEGER
+  screenHeight String
+  screenWidth String
+  language String
+  url_path String
+}
+
+
+Table app {
+  uid String pk
+  app_id String
+  app_key String
+}
+
+
+Table admin {
+  uid String pk
+  admin_name String
+  admin_passwd String
+  mobile String
+}
+
+Ref: app.app_id > log.app_id
+
+
+
+
+
+
+
