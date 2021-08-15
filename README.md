@@ -25,4 +25,13 @@ project
   |- .gitignore      # Git 管理时标识忽略内容的文件
 ```
 
-## 反馈
+## 数据库表格设计
+
+[数据库表格设计规约](./src/models/database.dbml)
+
+```shell
+dbdocs build ./src/models/database.dbml
+```
+
+https://dbdocs.io/vansin/byte_web_monitor
+
