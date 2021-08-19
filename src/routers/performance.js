@@ -7,7 +7,7 @@ const router = Router({
 const performanceController = require('../controllers/performanceController');
 
 // 组装路由
-router.post('/upload', performanceController.done);
+router.post('/upload', performanceController.create);
 
 // router.get('/:id/done', logController.create);
 // router.put('/:id/undone', todoController.undone);

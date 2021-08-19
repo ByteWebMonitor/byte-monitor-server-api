@@ -7,7 +7,7 @@ const router = Router({
 const errorController = require('../controllers/errorController');
 
 // 组装路由
-router.post('/upload', errorController.done);
+router.post('/upload', errorController.create);
 
 
 // router.get('/:id/done', logController.create);

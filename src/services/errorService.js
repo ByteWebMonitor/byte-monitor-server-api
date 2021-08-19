@@ -22,8 +22,8 @@ class ErrorService {
    * @param todo 用于创建待办事项的数据，原样存进数据库
    * @return {Promise<any>} 返回实际插入数据库的数据，会增加_id，createdAt和updatedAt字段
    */
-  async create(todo) {
-    // return await todoTable.save(todo);
+  async create(errorInfo) {
+    return await errorTable.save(errorInfo);
   }
 
   /**

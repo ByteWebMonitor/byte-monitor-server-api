@@ -12,20 +12,19 @@ class DeviceService {
    * 列出所有待办事项
    * @return {Promise<Array<any>>} 返回待办事项数组
    */
-  async listAll() {
+  async statAll() {
     // const all = await todoTable.where().find();
     // return all;
   }
 
-  /**
-   * 创建一条待办事项
-   * @param todo 用于创建待办事项的数据，原样存进数据库
-   * @return {Promise<any>} 返回实际插入数据库的数据，会增加_id，createdAt和updatedAt字段
-   */
-  async create(todo) {
-    // return await todoTable.save(todo);
-  }
 
+  /**
+   * 
+   * @param {*} todo 
+   */
+  async create(device) {
+    return await deviceTable.save(device);
+  }
   /**
    * 删除一条待办事项
    * @param id 待办事项的 _id
