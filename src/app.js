@@ -3,10 +3,13 @@ const koaBody = require('koa-body');
 const koaStatic = require('koa-static');
 const todoRouter = require('./routers/todo');
 const logRouter = require('./routers/log');
+const deviceRouter = require('./routers/device');
+const errorRouter = require('./routers/error');
+const performanceRouter = require('./routers/performance');
+
 const Koa = require('koa');
 const cors = require('koa2-cors');
 const app = new Koa();
-
 
 // 为应用使用中间件
 // 静态文件中间件
@@ -36,5 +39,8 @@ app.use(async function errorHandler(ctx, next) {
 // 使用待办事项业务路由
 app.use(todoRouter);
 app.use(logRouter);
+app.use(deviceRouter);
+app.use(errorRouter);
+app.use(performanceRouter);
 
 module.exports = app;
