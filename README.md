@@ -9,7 +9,9 @@ inspirecloud deploy -m "Deploying a new feature."
 
 ## API接口说明
 
+api地址：
 
+https://qcgtsp.app.cloudendpoint.cn/api
 
 ## 项目目录
 
