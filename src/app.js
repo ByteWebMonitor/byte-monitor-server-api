@@ -2,7 +2,6 @@ const path = require('path');
 const koaBody = require('koa-body');
 const koaStatic = require('koa-static');
 const todoRouter = require('./routers/todo');
-const logRouter = require('./routers/log');
 const deviceRouter = require('./routers/device');
 const errorRouter = require('./routers/error');
 const performanceRouter = require('./routers/performance');
@@ -38,7 +37,6 @@ app.use(async function errorHandler(ctx, next) {
 // 为应用使用路由定义
 // 使用待办事项业务路由
 app.use(todoRouter);
-app.use(logRouter);
 app.use(deviceRouter);
 app.use(errorRouter);
 app.use(performanceRouter);
