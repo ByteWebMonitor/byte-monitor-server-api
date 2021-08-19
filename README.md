@@ -20,9 +20,9 @@ npm install
 
 
 ```shell
-node ./test/deviceServiceTest.js
-node ./test/errorServiceTest.js
-node ./test/performanceService.js
+node ./test/deviceApiTest.js
+node ./test/errorApiTest.js
+node ./test/performanceApiTest.js
 ```
 
 
