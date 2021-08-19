@@ -14,7 +14,6 @@ class ErrorController {
     // ctx.body = {list};
     ctx.body = {status: 'ok'}
   }
-
   /**
    * 创建error记录
    * 响应格式
@@ -24,6 +23,21 @@ class ErrorController {
    * @param ctx Koa 的上下文参数
    */
   async create(ctx) {
+    let body = ctx.request.body
+    await errorService.create(body)
+    // let deviceInfo = JSON.parse(body.deviceInfo)
+    ctx.body = {status: 'ok'}
+
+  }
+
+
+  async getRecentXMinNums(ctx) {
+    let body = ctx.request.body
+    let nums = await errorService.getRecentXMinNums(body.xMin);
+    ctx.body = { code: 20000, nums: nums }
+  }
+
+  async getRecentList(ctx) {
     let body = ctx.request.body
     await errorService.create(body)
     // let deviceInfo = JSON.parse(body.deviceInfo)

@@ -15,18 +15,17 @@ class DeviceController {
   
   async create(ctx) {
     let body = ctx.request.body
+    body.time = new Date(body.time)
+
     await deviceService.create(body)
     ctx.body = {status: 'ok'}
   }
 
-
-  async deleteAll(ctx) {
-    // await todoService.deleteAll();
-    // ctx.body = {ok: true};
-    ctx.body = {status: 'ok'}
-
+  async getRecentXMinNums(ctx) {
+    let body = ctx.request.body
+    let nums = await deviceService.getRecentXMinNums(body.xMin);
+    ctx.body = { code: 20000, nums: nums }
   }
-
 }
 
 // 导出 Controller 的实例

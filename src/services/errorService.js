@@ -1,6 +1,7 @@
 const errorTable = require('../models/errorTable');
 const inspirecloud = require('@byteinspire/api');
 const ObjectId = inspirecloud.db.ObjectId;
+const db = inspirecloud.db;
 
 /**
  * TodoService
@@ -47,14 +48,15 @@ class ErrorService {
     // await todoTable.where().delete();
   }
 
-  /**
-   * 更新一条待办事项
-   * @param id 待办事项的 _id
-   * @param updater 将会用原对象 merge 此对象进行更新
-   * 若不存在，则抛出 404 错误
-   */
-  async update(id, updater) {
+  async getRecentXMinNums(xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let nums = await errorTable.where({
+      createdAt: db.gt(xMinAgoTimesDate)
+    }).count()
+    return nums
   }
+
 }
 
 // 导出 Service 的实例

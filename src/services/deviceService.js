@@ -1,6 +1,7 @@
 const deviceTable = require('../models/deviceTable');
 const inspirecloud = require('@byteinspire/api');
 const ObjectId = inspirecloud.db.ObjectId;
+const db = inspirecloud.db;
 
 /**
  * TodoService
@@ -30,13 +31,24 @@ class DeviceService {
    * @param id 待办事项的 _id
    * 若不存在，则抛出 404 错误
    */
-  async delete(id) {
+
+
+  async getRecentMin(min) {
     // const result = await todoTable.where({_id: ObjectId(id)}).delete();
     // if (result.deletedCount === 0) {
     //   const error = new Error(`todo:${id} not found`);
     //   error.status = 404;
     //   throw error;
     // }
+  }
+
+  async getRecentXMinNums(xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let nums = await deviceTable.where({
+      createdAt: db.gt(xMinAgoTimesDate)
+    }).count()
+    return nums
   }
 
   /**

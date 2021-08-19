@@ -8,6 +8,7 @@ const errorController = require('../controllers/errorController');
 
 // 组装路由
 router.post('/upload', errorController.create);
+router.post('/getRecentXMinNums', errorController.getRecentXMinNums);
 
 
 // router.get('/:id/done', logController.create);

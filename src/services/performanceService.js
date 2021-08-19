@@ -1,6 +1,7 @@
 const performanceTable = require('../models/performanceTable');
 const inspirecloud = require('@byteinspire/api');
 const ObjectId = inspirecloud.db.ObjectId;
+const db = inspirecloud.db;
 
 /**
  * TodoService
@@ -53,7 +54,13 @@ class PerformanceService {
    * @param updater 将会用原对象 merge 此对象进行更新
    * 若不存在，则抛出 404 错误
    */
-  async update(id, updater) {
+  async getRecentXMinNums(xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let nums = await performanceTable.where({
+      createdAt: db.gt(xMinAgoTimesDate)
+    }).count()
+    return nums
   }
 }
 

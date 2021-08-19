@@ -16,9 +16,16 @@ class PerformanceController {
 
   async create(ctx) {
     let body = ctx.request.body
+    body.time = new Date(body.time)
     await performanceService.create(body)
     // let deviceInfo = JSON.parse(body.deviceInfo)
     ctx.body = {status: 'ok'}
+  }
+
+  async getRecentXMinNums(ctx) {
+    let body = ctx.request.body
+    let nums = await performanceService.getRecentXMinNums(body.xMin);
+    ctx.body = { code: 20000, nums: nums }
   }
 
 }
