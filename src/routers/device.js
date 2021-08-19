@@ -4,11 +4,10 @@ const router = Router({
   prefix: '/api/device'
 });
 
-const logController = require('../controllers/logController');
+const deviceController = require('../controllers/deviceController');
 
 // 组装路由
-router.post('upload', logController.done);
-router.post('/', logController.done);
+router.post('/upload', deviceController.done);
 
 
 // router.get('/:id/done', logController.create);

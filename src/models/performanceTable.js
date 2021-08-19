@@ -6,4 +6,4 @@ const inspirecloud = require('@byteinspire/api');
 const performanceTable = inspirecloud.db.table('performance');
 
 // 导出 table 实例
-module.exports = performance;
+module.exports = performanceTable;
