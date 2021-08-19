@@ -41,7 +41,7 @@ Table performance {
   time timestamp [note:'消息生成的时刻']
 }
 
-Table log {
+Table error {
   uid String pk 
   app_id String
   url String
