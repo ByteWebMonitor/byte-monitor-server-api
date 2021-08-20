@@ -6,9 +6,12 @@
 git clone https://github.com/ByteWebMonitor/byte-monitor-server-api.git
 ```
 
+clone下来后 inspirecloud init 输入N
+
 ```shell
-inspirecloud 
+inspirecloud init
 ```
+![](https://moonstarimg.oss-cn-hangzhou.aliyuncs.com/picgo_img/20210820152625.png)
 
 
 ```shell
