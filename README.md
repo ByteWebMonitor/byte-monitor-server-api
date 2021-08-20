@@ -4,10 +4,12 @@
 
 ```sh
 git clone https://github.com/ByteWebMonitor/byte-monitor-server-api.git
-
-
-
 ```
+
+```shell
+inspirecloud 
+```
+
 
 ```shell
 inspirecloud dev
