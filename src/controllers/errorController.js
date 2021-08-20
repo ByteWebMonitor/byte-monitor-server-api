@@ -46,17 +46,12 @@ class ErrorController {
     ctx.body = returnInfo
   }
 
-
   async getRecentList(ctx) {
     let body = ctx.request.body
     await errorService.create(body)
     // let deviceInfo = JSON.parse(body.deviceInfo)
     ctx.body = {status: 'ok'}
-
   }
-
-
-
 }
 
 // 导出 Controller 的实例
