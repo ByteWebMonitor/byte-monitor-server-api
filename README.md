@@ -3,6 +3,7 @@
 
 
 ```sh
+inspirecloud dev
 inspirecloud deploy -m "Deploying a new feature."
 ```
 
@@ -57,4 +58,3 @@ dbdocs build ./src/models/database.dbml
 ```
 
 https://dbdocs.io/vansin/byte_web_monitor
-
