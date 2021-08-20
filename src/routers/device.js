@@ -10,6 +10,8 @@ const deviceController = require('../controllers/deviceController');
 router.post('/upload', deviceController.create);
 router.post('/getRecentXMinNums', deviceController.getRecentXMinNums);
 router.post('/getAllItemList', deviceController.getAllItemList);
+router.post('/statXMinRecentPvBrowserRatio', deviceController.statXMinRecentPvBrowserRatio);
+router.post('/statXMinRecentPvOsRatio', deviceController.statXMinRecentPvOsRatio);
 
 
 // Koa 的路由需要调用 routes 函数获取实际用于 use 的函数

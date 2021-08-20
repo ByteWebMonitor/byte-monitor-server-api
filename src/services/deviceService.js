@@ -10,20 +10,6 @@ const db = inspirecloud.db;
  */
 class DeviceService {
 
-  async create(device) {
-    return await deviceTable.save(device);
-  }
-
-  async getRecentXMinNums(app_id, xMin) {
-    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
-    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
-    let nums = await deviceTable.where({
-      createdAt: db.gt(xMinAgoTimesDate),
-      app_id: app_id
-    }).count()
-    return nums
-  }
-
   async getAllItemList(app_id, skip, limit) {
     // 使用 inspirecloud.db.table 获取数据表
     const ItemList = await deviceTable.where({
@@ -39,6 +25,50 @@ class DeviceService {
       total: total
     }
   }
+
+  async create(device) {
+    return await deviceTable.save(device);
+  }
+
+  async getRecentXMinNums(app_id, xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let nums = await deviceTable.where({
+      createdAt: db.gt(xMinAgoTimesDate),
+      app_id: app_id
+    }).count()
+    return nums
+  }
+
+  async statXMinRecentPvOsRatio(app_id, xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let info = await deviceTable.where({
+      createdAt: db.gt(xMinAgoTimesDate),
+      app_id: app_id
+    })
+    .groupBy('OS')
+    .num().as('num')
+    .find();
+
+    return info
+  }
+
+  async statXMinRecentPvBrowserRatio(app_id, xMin) {
+    let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
+    const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
+    let info = await deviceTable.where({
+      createdAt: db.gt(xMinAgoTimesDate),
+      app_id: app_id
+    })
+    .groupBy('browser')
+    .num().as('num')
+    .find();
+
+    return info
+  }
+
+  
 
 }
 

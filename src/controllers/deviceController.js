@@ -3,6 +3,17 @@ const deviceService = require('../services/deviceService');
 
 class DeviceController {
 
+  async getAllItemList(ctx) {
+    let body = ctx.request.body
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+    let returnInfo = await deviceService.getAllItemList(app_id, body.skip, body.limit);
+    returnInfo.code = 20000
+    ctx.body = returnInfo
+  }
+
   async create(ctx) {
     let body = ctx.request.body
     // body.time = new Date(body.time)
@@ -25,16 +36,34 @@ class DeviceController {
     ctx.body = { code: 20000, nums: nums }
   }
 
-  async getAllItemList(ctx) {
+  async statXMinRecentPvBrowserRatio(ctx) {
     let body = ctx.request.body
+
     let app_id = 'unknown'
     if ('app_id' in body) {
       app_id = body.app_id
     }
-    let returnInfo = await deviceService.getAllItemList(app_id, body.skip, body.limit);
-    returnInfo.code = 20000
-    ctx.body = returnInfo
+
+    let retunInfo = await deviceService.statXMinRecentPvBrowserRatio(app_id, body.xMin);
+    retunInfo.code = 20000
+    ctx.body = retunInfo
+
   }
+
+  async statXMinRecentPvOsRatio(ctx) {
+    let body = ctx.request.body
+
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+    let retunInfo = await deviceService.statXMinRecentPvOsRatio(app_id, body.xMin);
+    retunInfo.code = 20000
+    ctx.body = retunInfo
+  }
+
+
+
 }
 
 // 导出 Controller 的实例

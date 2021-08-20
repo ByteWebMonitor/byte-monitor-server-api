@@ -23,3 +23,19 @@ request.post('/device/getAllItemList', {
 }).then( res=> {
     console.log(res.data)
 })
+
+
+request.post('/device/statXMinRecentPvBrowserRatio', {
+    app_id: '114514114514abc',
+    xMin: 60000000000000
+}).then( res=> {
+    console.log(res.data)
+})
+
+
+request.post('/device/statXMinRecentPvOsRatio', {
+    app_id: '114514114514abc',
+    xMin: 60000000000000
+}).then( res=> {
+    console.log(res.data)
+})
