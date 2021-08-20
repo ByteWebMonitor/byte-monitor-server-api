@@ -16,3 +16,11 @@ request.post('/error/getRecentXMinNums', {
 }).catch(e=>{
     console.error(e)
 })
+
+
+request.post('/error/getAllItemList', {
+    skip: 0,
+    limit: 3
+}).then( res=> {
+    console.log(res.data)
+})

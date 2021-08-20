@@ -12,3 +12,11 @@ request.post('/device/getRecentXMinNums', {
 }).then( res=> {
     console.log(res.data)
 })
+
+
+request.post('/device/getAllItemList', {
+    skip: 0,
+    limit: 3
+}).then( res=> {
+    console.log(res.data)
+})

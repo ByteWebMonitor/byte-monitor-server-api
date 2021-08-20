@@ -9,44 +9,26 @@ const db = inspirecloud.db;
  * 包含待办事项的增删改查功能
  */
 class ErrorService {
-  /**
-   * 列出所有待办事项
-   * @return {Promise<Array<any>>} 返回待办事项数组
-   */
-  async listAll() {
-    // const all = await todoTable.where().find();
-    // return all;
+
+  async getAllItemList(skip, limit) {
+    // 使用 inspirecloud.db.table 获取数据表
+    const ItemList = await errorTable.where()
+        .sort({createdAt: -1})// 使用 sort 指定按照 qty 逆序排序
+        .skip(skip)// 使用 skip 跳过前 2 项
+        .limit(limit)// 使用 limit 指定返回 2 项
+        .find();
+    const total = await errorTable.where().count()
+    return {
+      ItemList: ItemList,
+      total: total
+    }
   }
 
-  /**
-   * 创建一条待办事项
-   * @param todo 用于创建待办事项的数据，原样存进数据库
-   * @return {Promise<any>} 返回实际插入数据库的数据，会增加_id，createdAt和updatedAt字段
-   */
   async create(errorInfo) {
     return await errorTable.save(errorInfo);
   }
 
-  /**
-   * 删除一条待办事项
-   * @param id 待办事项的 _id
-   * 若不存在，则抛出 404 错误
-   */
-  async delete(id) {
-    // const result = await todoTable.where({_id: ObjectId(id)}).delete();
-    // if (result.deletedCount === 0) {
-    //   const error = new Error(`todo:${id} not found`);
-    //   error.status = 404;
-    //   throw error;
-    // }
-  }
 
-  /**
-   * 删除所有待办事项
-   */
-  async deleteAll() {
-    // await todoTable.where().delete();
-  }
 
   async getRecentXMinNums(xMin) {
     let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000

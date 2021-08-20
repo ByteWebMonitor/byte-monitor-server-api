@@ -12,3 +12,11 @@ request.post('/performance/getRecentXMinNums', {
 }).then( res=> {
     console.log(res.data)
 })
+
+
+request.post('/performance/getAllItemList', {
+    skip: 0,
+    limit: 30
+}).then( res=> {
+    console.log(res.data)
+})

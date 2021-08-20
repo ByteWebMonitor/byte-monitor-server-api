@@ -51,6 +51,19 @@ class DeviceService {
     return nums
   }
 
+  async getAllItemList(skip, limit) {
+    // 使用 inspirecloud.db.table 获取数据表
+    const ItemList = await deviceTable.where()
+        .sort({createdAt: -1})// 使用 sort 指定按照 qty 逆序排序
+        .skip(skip)// 使用 skip 跳过前 2 项
+        .limit(limit)// 使用 limit 指定返回 2 项
+        .find();
+    const total = await deviceTable.where().count()
+    return {
+      ItemList: ItemList,
+      total: total
+    }
+  }
   /**
    * 删除所有待办事项
    */

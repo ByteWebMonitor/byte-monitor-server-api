@@ -37,6 +37,14 @@ class ErrorController {
     ctx.body = { code: 20000, nums: nums }
   }
 
+  async getAllItemList(ctx) {
+    let body = ctx.request.body
+    let returnInfo = await errorService.getAllItemList(body.skip, body.limit);
+    returnInfo.code = 20000
+    ctx.body = returnInfo
+  }
+  
+
   async getRecentList(ctx) {
     let body = ctx.request.body
     await errorService.create(body)
@@ -44,6 +52,8 @@ class ErrorController {
     ctx.body = {status: 'ok'}
 
   }
+
+
 
 }
 

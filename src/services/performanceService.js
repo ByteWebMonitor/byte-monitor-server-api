@@ -9,15 +9,21 @@ const db = inspirecloud.db;
  * 包含待办事项的增删改查功能
  */
 class PerformanceService {
-  /**
-   * 列出所有待办事项
-   * @return {Promise<Array<any>>} 返回待办事项数组
-   */
-  async listAll() {
-    // const all = await todoTable.where().find();
-    // return all;
-  }
 
+  
+  async getAllItemList(skip, limit) {
+    // 使用 inspirecloud.db.table 获取数据表
+    const ItemList = await performanceTable.where()
+        .sort({createdAt: -1})// 使用 sort 指定按照 qty 逆序排序
+        .skip(skip)// 使用 skip 跳过前 2 项
+        .limit(limit)// 使用 limit 指定返回 2 项
+        .find();
+    const total = await performanceTable.where().count()
+    return {
+      ItemList: ItemList,
+      total: total
+    }
+  }
   /**
    * 创建一条待办事项
    * @param todo 用于创建待办事项的数据，原样存进数据库

@@ -9,6 +9,7 @@ const performanceController = require('../controllers/performanceController');
 // 组装路由
 router.post('/upload', performanceController.create);
 router.post('/getRecentXMinNums', performanceController.getRecentXMinNums);
+router.post('/getAllItemList', performanceController.getAllItemList);
 
 // router.get('/:id/done', logController.create);
 // router.put('/:id/undone', todoController.undone);

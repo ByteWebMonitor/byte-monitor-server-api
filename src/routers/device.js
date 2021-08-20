@@ -9,6 +9,7 @@ const deviceController = require('../controllers/deviceController');
 // 组装路由
 router.post('/upload', deviceController.create);
 router.post('/getRecentXMinNums', deviceController.getRecentXMinNums);
+router.post('/getAllItemList', deviceController.getAllItemList);
 
 
 // router.get('/:id/done', logController.create);

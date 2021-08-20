@@ -9,7 +9,7 @@ const errorController = require('../controllers/errorController');
 // 组装路由
 router.post('/upload', errorController.create);
 router.post('/getRecentXMinNums', errorController.getRecentXMinNums);
-
+router.post('/getAllItemList', errorController.getAllItemList);
 
 // router.get('/:id/done', logController.create);
 // router.put('/:id/undone', todoController.undone);
