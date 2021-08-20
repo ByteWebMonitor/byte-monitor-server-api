@@ -7,6 +7,8 @@ class DeviceController {
     let body = ctx.request.body
     // body.time = new Date(body.time)
     body.ip = ctx.request.ip
+    body.time = new Date(body.time)
+
     await deviceService.create(body)
     ctx.body = {status: 'ok'}
   }

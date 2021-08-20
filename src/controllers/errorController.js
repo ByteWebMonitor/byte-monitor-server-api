@@ -11,10 +11,12 @@ class ErrorController {
 
   async create(ctx) {
     let body = ctx.request.body
+    for (let item of body) {
+        item.time = new Date(item.time)
+    }
     await errorService.create(body)
     // let deviceInfo = JSON.parse(body.deviceInfo)
     ctx.body = {status: 'ok'}
-
   }
 
 
