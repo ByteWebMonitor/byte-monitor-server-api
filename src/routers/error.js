@@ -10,6 +10,6 @@ const errorController = require('../controllers/errorController');
 router.post('/upload', errorController.create);
 router.post('/getRecentXMinNums', errorController.getRecentXMinNums);
 router.post('/getAllItemList', errorController.getAllItemList);
-
+  
 // Koa 的路由需要调用 routes 函数获取实际用于 use 的函数
 module.exports = router.routes();

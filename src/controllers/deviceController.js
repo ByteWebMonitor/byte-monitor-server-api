@@ -5,7 +5,9 @@ class DeviceController {
 
   async create(ctx) {
     let body = ctx.request.body
-    body.time = new Date(body.time)
+    const xRealIp = ctx.get('X-Real-Ip');
+    // body.time = new Date(body.time)
+    body.ip = ctx.request.ip
     await deviceService.create(body)
     ctx.body = {status: 'ok'}
   }
@@ -24,17 +26,14 @@ class DeviceController {
 
   async getAllItemList(ctx) {
     let body = ctx.request.body
-
     let app_id = 'unknown'
     if ('app_id' in body) {
       app_id = body.app_id
     }
-
     let returnInfo = await deviceService.getAllItemList(app_id, body.skip, body.limit);
     returnInfo.code = 20000
     ctx.body = returnInfo
   }
-
 }
 
 // 导出 Controller 的实例

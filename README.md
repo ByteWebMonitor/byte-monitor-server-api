@@ -25,6 +25,10 @@ node ./test/errorApiTest.js
 node ./test/performanceApiTest.js
 ```
 
+- 一段时间内
+  - 操作系统使用占比扇形图
+  - 浏览器使用占比扇形图
+
 
 ## 项目目录
 
