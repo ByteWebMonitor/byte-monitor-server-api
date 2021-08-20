@@ -20,13 +20,25 @@ class PerformanceController {
 
   async getRecentXMinNums(ctx) {
     let body = ctx.request.body
-    let nums = await performanceService.getRecentXMinNums(body.xMin);
+
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+
+    let nums = await performanceService.getRecentXMinNums(app_id, body.xMin);
     ctx.body = { code: 20000, nums: nums }
   }
 
   async getAllItemList(ctx) {
     let body = ctx.request.body
-    let returnInfo = await performanceService.getAllItemList(body.skip, body.limit);
+
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+
+    let returnInfo = await performanceService.getAllItemList(app_id, body.skip, body.limit);
     returnInfo.code = 20000
     ctx.body = returnInfo
   }
