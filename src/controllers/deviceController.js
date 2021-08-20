@@ -5,7 +5,6 @@ class DeviceController {
 
   async create(ctx) {
     let body = ctx.request.body
-    const xRealIp = ctx.get('X-Real-Ip');
     // body.time = new Date(body.time)
     body.ip = ctx.request.ip
     await deviceService.create(body)
