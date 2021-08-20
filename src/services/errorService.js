@@ -3,11 +3,6 @@ const inspirecloud = require('@byteinspire/api');
 const ObjectId = inspirecloud.db.ObjectId;
 const db = inspirecloud.db;
 
-/**
- * TodoService
- * Service 是业务具体实现，由 Controller 或其它 Service 调用
- * 包含待办事项的增删改查功能
- */
 class ErrorService {
 
   async getAllItemList(skip, limit) {

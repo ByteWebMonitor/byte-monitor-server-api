@@ -1,10 +1,6 @@
 const performanceService = require('../services/performanceService');
 
-/**
- * TodoController
- * Controller 是业务入口，由 HTTP 路由解析后调用
- * 包含待办事项的增删改查功能
- */
+
 
 class PerformanceController {
 

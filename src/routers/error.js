@@ -11,11 +11,5 @@ router.post('/upload', errorController.create);
 router.post('/getRecentXMinNums', errorController.getRecentXMinNums);
 router.post('/getAllItemList', errorController.getAllItemList);
 
-// router.get('/:id/done', logController.create);
-// router.put('/:id/undone', todoController.undone);
-// router.get('/', todoController.listAll);
-// router.delete('/:id', todoController.delete);
-// router.delete('/', todoController.deleteAll);
-
 // Koa 的路由需要调用 routes 函数获取实际用于 use 的函数
 module.exports = router.routes();

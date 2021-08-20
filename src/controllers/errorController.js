@@ -8,20 +8,7 @@ const errorService = require('../services/errorService');
 
 class ErrorController {
 
-
-  async statAll(ctx) {
-    // const list = await todoService.listAll();
-    // ctx.body = {list};
-    ctx.body = {status: 'ok'}
-  }
-  /**
-   * 创建error记录
-   * 响应格式
-   * {
-   *   result: newTodo
-   * }
-   * @param ctx Koa 的上下文参数
-   */
+  
   async create(ctx) {
     let body = ctx.request.body
     await errorService.create(body)
@@ -43,7 +30,7 @@ class ErrorController {
     returnInfo.code = 20000
     ctx.body = returnInfo
   }
-  
+
 
   async getRecentList(ctx) {
     let body = ctx.request.body
