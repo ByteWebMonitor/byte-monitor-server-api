@@ -12,6 +12,7 @@ router.post('/getRecentXMinNums', deviceController.getRecentXMinNums);
 router.post('/getAllItemList', deviceController.getAllItemList);
 router.post('/statXMinRecentPvBrowserRatio', deviceController.statXMinRecentPvBrowserRatio);
 router.post('/statXMinRecentPvOsRatio', deviceController.statXMinRecentPvOsRatio);
+router.post('/statXDayPerDayPv', deviceController.statXDayPerDayPv);
 
 
 // Koa 的路由需要调用 routes 函数获取实际用于 use 的函数

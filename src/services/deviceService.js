@@ -68,7 +68,38 @@ class DeviceService {
     return info
   }
 
+  async statXDayPerDayPv(app_id, xDay) {
+  // 使用 where() 查询所有数据，使用 groupBy('type') 将查询数据按 type 分组，使用 sum('stock') 对 stock 字段求和
+  let xDayAgoTimestamp = new Date().getTime()  - xDay* 24 * 60 * 1000
+  const xDayAgoDate = new Date(xDayAgoTimestamp)
+
+  const result = await deviceTable
+    .where({
+      createdAt: db.gt(xDayAgoDate),
+      app_id: app_id
+    })
+    // 查询一个时间段的数据用于聚合
+    // .where('createdAt')
+    // .gte(new Date('2014-01-01'))
+    // .lt(new Date())
+    // 开始分组, 分组对象是表达式, 用 $dateToString 操作符将 date 转为年月日形态来分组
+    // 
+    .groupBy(db.dateToString({format: '%Y-%m-%d', date: '$createdAt', timezone: '+08'}))
+    .as('dateDay')
+    .num()
+    .as('num')
+    // 聚合完成后对中间结果查询, 按照 totalSaleAmount 倒序排列
+    .where()
+    .sort({dateDay: 1})
+    .find();
   
+    return result
+  
+  }
+
+  
+
+
 
 }
 
