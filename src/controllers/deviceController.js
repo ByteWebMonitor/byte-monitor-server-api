@@ -1,4 +1,5 @@
 const deviceService = require('../services/deviceService');
+const appService = require('../services/appService');
 
 
 class DeviceController {
@@ -17,11 +18,19 @@ class DeviceController {
   async create(ctx) {
     let body = ctx.request.body
     // body.time = new Date(body.time)
-    body.ip = ctx.request.ip
-    body.time = new Date(body.time)
 
-    await deviceService.create(body)
-    ctx.body = {status: 'ok'}
+    let isAppIdExist = await appService.isAppIdExist(body.app_id)
+    if (isAppIdExist === false || body.app_id === undefined) {
+        ctx.body = {code: '20001', msg: 'app_id is not exist'}
+    } else {
+      body.ip = ctx.request.ip
+      body.time = new Date(body.time)
+
+      await deviceService.create(body)
+      ctx.body = {code: '20000', msg:'success'}
+    }
+
+
   }
 
   async getRecentXMinNums(ctx) {

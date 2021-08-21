@@ -1,4 +1,5 @@
 const errorService = require('../services/errorService');
+const appService = require('../services/appService');
 
 /**
  * TodoController
@@ -11,12 +12,21 @@ class ErrorController {
 
   async create(ctx) {
     let body = ctx.request.body
-    for (let item of body) {
-        item.time = new Date(item.time)
+    // let isAppIdExist = await appService.isAppIdExist(body.app_id)
+    let isAppIdExist = await appService.isAppIdExist(body[0].app_id)
+    
+    // if (isAppIdExist === false || body.app_id === undefined) {
+    if (isAppIdExist === false || body[0].app_id === undefined) {
+        ctx.body = {code: '20001', msg: 'app_id is not exist'}
+    } else {
+        for (let item of body) {
+            item.time = new Date(item.time)
+        }
+        await errorService.create(body)
+        // let deviceInfo = JSON.parse(body.deviceInfo)
+        ctx.body = {code: '20000', msg:'success'}
     }
-    await errorService.create(body)
-    // let deviceInfo = JSON.parse(body.deviceInfo)
-    ctx.body = {status: 'ok'}
+
   }
 
 

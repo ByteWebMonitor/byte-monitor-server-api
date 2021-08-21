@@ -11,6 +11,17 @@ request.post('/app/adminAddAppId', {
     console.error(e)
 })
 
+request.post('/app/adminAddAppId', {
+    admin_name: 'admin1',
+    app_id: 'byte-monitor-docs',
+    app_name: '字节监控对外文档',
+    app_desc: '字节监控对外文档~',
+}).then( res=> {
+    console.log(res.data)
+}).catch(e => {
+    console.error(e)
+})
+
 
 
 request.post('/app/getAdminAppIdList', {

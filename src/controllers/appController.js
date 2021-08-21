@@ -1,4 +1,5 @@
 const appService = require('../services/appService');
+const adminService = require('../services/adminService');
 
 
 class AppController {
@@ -9,8 +10,18 @@ class AppController {
     let app_id = body.app_id
     let app_name = body.app_name
     let app_desc = body.app_desc
-    let returnInfo = await appService.adminAddAppId(admin_name, app_id, app_name, app_desc);
-    ctx.body = returnInfo
+
+    let isAdminExist = await adminService.isAdminExist(admin_name);
+
+    if (isAdminExist === false) {
+      ctx.body = {
+        code: 20001,
+        msg: 'admin不存在'
+      }
+    } else {
+        let returnInfo = await appService.adminAddAppId(admin_name, app_id, app_name, app_desc);
+        ctx.body = returnInfo
+    }
   }
   async getAdminAppIdList(ctx) {
     let body = ctx.request.body
