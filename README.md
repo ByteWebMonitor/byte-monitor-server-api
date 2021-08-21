@@ -3,10 +3,21 @@
 
 
 ```sh
-inspirecloud deploy -m "Deploying a new feature."
+git clone https://github.com/ByteWebMonitor/byte-monitor-server-api.git
 ```
 
+clone下来后 inspirecloud init 输入N
 
+```shell
+inspirecloud init
+```
+![](https://moonstarimg.oss-cn-hangzhou.aliyuncs.com/picgo_img/20210820152625.png)
+
+
+```shell
+inspirecloud dev
+inspirecloud deploy -m "Deploying a new feature."
+```
 ## API接口说明
 
 api地址：
@@ -57,4 +68,3 @@ dbdocs build ./src/models/database.dbml
 ```
 
 https://dbdocs.io/vansin/byte_web_monitor
-
