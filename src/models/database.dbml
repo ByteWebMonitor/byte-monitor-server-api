@@ -59,25 +59,25 @@ Table error {
 
 
 Table app {
-  uid String pk
-  app_id String
-  app_key String
-  user_id String
+  _id String pk
+  admin_name String [note: '管理员账号']
+  app_id String [note: '应用id']
+  app_name String [note: '应用名称']
+  app_desc String [note: '关于应用的详细描述']
 }
 
 
 Table admin {
   uid String pk
-  user_id String pk
   admin_name String
   admin_passwd String
   mobile String
 }
 
-Ref: admin.user_id > app.user_id
+Ref: admin.admin_name > app.admin_name
 Ref: app.app_id > device.app_id
 Ref: app.app_id > performance.app_id
-Ref: app.app_id > log.app_id
+Ref: app.app_id > error.app_id
 
 
 
