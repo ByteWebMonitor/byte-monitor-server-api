@@ -6,6 +6,8 @@ const deviceRouter = require('./routers/device');
 const errorRouter = require('./routers/error');
 const performanceRouter = require('./routers/performance');
 const adminRouter = require('./routers/admin');
+const appRouter = require('./routers/app');
+
 
 const Koa = require('koa');
 const cors = require('koa2-cors');
@@ -60,5 +62,6 @@ app.use(deviceRouter);
 app.use(errorRouter);
 app.use(performanceRouter);
 app.use(adminRouter);
+app.use(appRouter);
 
 module.exports = app;
