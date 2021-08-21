@@ -78,7 +78,13 @@ class DeviceService {
     }
   }
   // 使用 where() 查询所有数据，使用 groupBy('type') 将查询数据按 type 分组，使用 sum('stock') 对 stock 字段求和
-  let timeNowTimestamp = new Date(new Date().toDateString('+08')).getTime()
+  // let timeNowTimestamp = new Date(new Date().toDateString('+08')).getTime()
+
+  let nowDate = new Date()
+  let timeNowTimestamp = new Date(nowDate.getUTCFullYear()+ '-' + (nowDate.getUTCMonth()+1) + '-' + (nowDate.getUTCDate()) + ' 00:00:00 +00').getTime() - 8 * 60 *60 * 1000
+  // let timeNowTimestamp = new Date(nowDate.getUTCFullYear(), nowDate.getUTCMonth(), nowDate.getUTCDay()).getTime()
+
+
   let xDayAgoTimestamp = timeNowTimestamp - xDay* 24 * 60 * 60 * 1000
   const xDayAgoDate = new Date(xDayAgoTimestamp)
 
