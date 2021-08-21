@@ -14,6 +14,15 @@ class AdminService {
 
   }
 
+  async isAdminExist(adminName) {
+      const count = await adminTable.where({ admin_name: adminName}).count();
+      if (count>0) {
+        return true
+      } else {
+        return false
+      }
+  }
+
 }
 
 // 导出 Service 的实例
