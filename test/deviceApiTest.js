@@ -40,9 +40,18 @@ const request = require('./request')
 //     console.log(res.data)
 // })
 
-request.post('/device/statXDayPerDayPv', {
+// request.post('/device/statXDayPerDayPv', {
+//     app_id: '114514114514abc',
+//     xDay: 20
+// }).then( res=> {
+//     console.log(res.data)
+// }).catch(e=>{
+//     console.log(e)
+// })
+
+request.post('/device/statXHourPerHourPv', {
     app_id: '114514114514abc',
-    xDay: 20
+    xHour: 72
 }).then( res=> {
     console.log(res.data)
 }).catch(e=>{

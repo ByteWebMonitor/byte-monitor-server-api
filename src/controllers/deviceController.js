@@ -79,7 +79,17 @@ class DeviceController {
       app_id = body.app_id
     }
     let retunInfo = await deviceService.statXDayPerDayPv(app_id, body.xDay);
-    retunInfo.code = 20000
+    ctx.body = retunInfo
+  }
+
+  async statXHourPerHourPv(ctx) {
+    let body = ctx.request.body
+
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+    let retunInfo = await deviceService.statXHourPerHourPv(app_id, body.xHour);
     ctx.body = retunInfo
   }
 
