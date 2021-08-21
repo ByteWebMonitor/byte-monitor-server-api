@@ -42,7 +42,7 @@ const request = require('./request')
 
 request.post('/device/statXDayPerDayPv', {
     app_id: '114514114514abc',
-    xDay: 600
+    xDay: 20
 }).then( res=> {
     console.log(res.data)
 }).catch(e=>{

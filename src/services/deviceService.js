@@ -69,8 +69,17 @@ class DeviceService {
   }
 
   async statXDayPerDayPv(app_id, xDay) {
+
+  if (xDay>60) {
+    return {
+      code: 20001,
+      msg: '不能获取60天之外的数据',
+      list: []
+    }
+  }
   // 使用 where() 查询所有数据，使用 groupBy('type') 将查询数据按 type 分组，使用 sum('stock') 对 stock 字段求和
-  let xDayAgoTimestamp = new Date().getTime()  - xDay* 24 * 60 * 1000
+  let timeNowTimestamp = new Date(new Date().toDateString('+08')).getTime()
+  let xDayAgoTimestamp = timeNowTimestamp - xDay* 24 * 60 * 60 * 1000
   const xDayAgoDate = new Date(xDayAgoTimestamp)
 
   const result = await deviceTable
@@ -84,7 +93,69 @@ class DeviceService {
     // .lt(new Date())
     // 开始分组, 分组对象是表达式, 用 $dateToString 操作符将 date 转为年月日形态来分组
     // 
-    .groupBy(db.dateToString({format: '%Y-%m-%d', date: '$createdAt', timezone: '+08'}))
+    .groupBy(db.dateToString({format: '%Y-%m-%d 00:00:00 +08', date: '$createdAt', timezone: '+08'}))
+    .as('dateDay')
+    .num()
+    .as('num')
+    // 聚合完成后对中间结果查询, 按照 totalSaleAmount 倒序排列
+    .where()
+    .sort({dateDay: 1})
+    .find();
+
+    let existMap = {}
+
+    for (let item of result) {
+      let timestap = new Date(item.dateDay).getTime()
+      existMap[timestap] = item.num
+    }
+
+
+
+    let returnList = []
+    let iterTime = xDayAgoTimestamp
+
+    while(iterTime<=timeNowTimestamp) {
+      let iterDate = new Date()
+
+      let item = {
+        timestamp: iterTime,
+        date: new Date(iterTime).toLocaleString(),
+        num: 0
+      }
+
+      if (iterTime in existMap) {
+        item.num = existMap[iterTime]
+      }
+
+      returnList.push(item)
+
+      iterTime+= 24 * 60 * 60 * 1000
+    }
+
+    return {
+      code: 20000,
+      msg: '获取',
+      list: returnList
+    }  
+  }
+
+  
+  async statXDayPerHourPv(app_id) {
+  // 使用 where() 查询所有数据，使用 groupBy('type') 将查询数据按 type 分组，使用 sum('stock') 对 stock 字段求和
+  let xDayAgoTimestamp = new Date().getTime() - 24 * 60 * 1000
+  const xDayAgoDate = new Date(xDayAgoTimestamp)
+  const result = await deviceTable
+    .where({
+      createdAt: db.gt(xDayAgoDate),
+      app_id: app_id
+    })
+    // 查询一个时间段的数据用于聚合
+    // .where('createdAt')
+    // .gte(new Date('2014-01-01'))
+    // .lt(new Date())
+    // 开始分组, 分组对象是表达式, 用 $dateToString 操作符将 date 转为年月日形态来分组
+    // "%Y%m%d%H%M%S"
+    .groupBy(db.dateToString({format: '%Y-%m-%d %H:00:00 +08', date: '$createdAt', timezone: '+08'}))
     .as('dateDay')
     .num()
     .as('num')
@@ -96,9 +167,6 @@ class DeviceService {
     return result
   
   }
-
-  
-
 
 
 }
