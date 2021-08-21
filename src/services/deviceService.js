@@ -3,6 +3,16 @@ const inspirecloud = require('@byteinspire/api');
 const ObjectId = inspirecloud.db.ObjectId;
 const db = inspirecloud.db;
 
+let dayjs = require('dayjs')
+var utc = require('dayjs/plugin/utc')
+var timezone = require('dayjs/plugin/timezone') // dependent on utc plugin
+dayjs.extend(utc)
+dayjs.extend(timezone)
+
+
+dayjs.tz.setDefault("Asia/Shanghai")
+
+
 /**
  * TodoService
  * Service 是业务具体实现，由 Controller 或其它 Service 调用
@@ -125,7 +135,7 @@ class DeviceService {
 
       let item = {
         timestamp: iterTime,
-        date: new Date(iterTime).toLocaleString(),
+        date: dayjs.tz(iterTime, "Asia/Shanghai").format('YYYY-MM-DD HH:mm:ss'),
         num: 0
       }
 
@@ -200,7 +210,7 @@ class DeviceService {
 
       let item = {
         timestamp: iterTime,
-        date: new Date(iterTime).toLocaleString(),
+        date: dayjs.tz(iterTime, "Asia/Shanghai").format('YYYY-MM-DD HH:mm:ss'),
         num: 0
       }
 
