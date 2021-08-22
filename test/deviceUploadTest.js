@@ -1,12 +1,12 @@
 const request = require('./request')
 
-
-
+let statTimeStamp = new Date('2021-08-11 00:00:00 +0800').getTime()
+let nowTimeStamp = new Date('2021-08-16 00:00:00 +0800').getTime()
+let step_ms = 24 * 60 * 60 * 1000
 
 
 const mock = (async () => {
-    let statTimeStamp = new Date(2021,7,10).getTime()
-    let nowTimeStamp = new Date().getTime()
+
     console.log(statTimeStamp, nowTimeStamp)
     while (statTimeStamp< nowTimeStamp) {
         console.log(statTimeStamp)
@@ -27,7 +27,7 @@ const mock = (async () => {
         app_id:"byte-monitor-docs"
     }
         await request.post('/device/upload',data)
-        statTimeStamp += 24*60*60 * 1000
+        statTimeStamp += step_ms
     }
 
 
