@@ -51,6 +51,18 @@ class PerformanceController {
     ctx.body = returnInfo
   }
 
+  async statXMinAvg(ctx) {
+    let body = ctx.request.body
+
+    let app_id = 'unknown'
+    if ('app_id' in body) {
+      app_id = body.app_id
+    }
+
+    let returnInfo = await performanceService.statXMinAvg(app_id, body.xMin);
+    ctx.body = returnInfo
+  }
+
 }
 
 // 导出 Controller 的实例

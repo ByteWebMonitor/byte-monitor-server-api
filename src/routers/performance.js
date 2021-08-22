@@ -10,6 +10,7 @@ const performanceController = require('../controllers/performanceController');
 router.post('/upload', performanceController.create);
 router.post('/getRecentXMinNums', performanceController.getRecentXMinNums);
 router.post('/getAllItemList', performanceController.getAllItemList);
+router.post('/statXMinAvg', performanceController.statXMinAvg);
 
 
 // Koa 的路由需要调用 routes 函数获取实际用于 use 的函数
