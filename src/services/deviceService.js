@@ -25,7 +25,7 @@ class DeviceService {
     const ItemList = await deviceTable.where({
       app_id: app_id
     })
-        .sort({createdAt: -1})// 使用 sort 指定按照 qty 逆序排序
+        .sort({time: -1})// 使用 sort 指定按照 qty 逆序排序
         .skip(skip)// 使用 skip 跳过前 2 项
         .limit(limit)// 使用 limit 指定返回 2 项
         .find();
@@ -44,7 +44,7 @@ class DeviceService {
     let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
     const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
     let nums = await deviceTable.where({
-      createdAt: db.gt(xMinAgoTimesDate),
+      time: db.gt(xMinAgoTimesDate),
       app_id: app_id
     }).count()
     return nums
@@ -54,7 +54,7 @@ class DeviceService {
     let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
     const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
     let info = await deviceTable.where({
-      createdAt: db.gt(xMinAgoTimesDate),
+      time: db.gt(xMinAgoTimesDate),
       app_id: app_id
     })
     .groupBy('OS')
@@ -68,7 +68,7 @@ class DeviceService {
     let xMinAgoTimestamp = new Date().getTime()  - xMin * 60 * 1000
     const xMinAgoTimesDate = new Date(xMinAgoTimestamp)
     let info = await deviceTable.where({
-      createdAt: db.gt(xMinAgoTimesDate),
+      time: db.gt(xMinAgoTimesDate),
       app_id: app_id
     })
     .groupBy('browser')
@@ -100,16 +100,16 @@ class DeviceService {
 
   const result = await deviceTable
     .where({
-      createdAt: db.gt(xDayAgoDate),
+      time: db.gt(xDayAgoDate),
       app_id: app_id
     })
     // 查询一个时间段的数据用于聚合
-    // .where('createdAt')
+    // .where('time')
     // .gte(new Date('2014-01-01'))
     // .lt(new Date())
     // 开始分组, 分组对象是表达式, 用 $dateToString 操作符将 date 转为年月日形态来分组
     // 
-    .groupBy(db.dateToString({format: '%Y-%m-%d 00:00:00 +08', date: '$createdAt', timezone: '+08'}))
+    .groupBy(db.dateToString({format: '%Y-%m-%d 00:00:00 +08', date: '$time', timezone: '+08'}))
     .as('dateDay')
     .num()
     .as('num')
@@ -175,16 +175,16 @@ class DeviceService {
 
   const result = await deviceTable
     .where({
-      createdAt: db.gt(xHourAgoDate),
+      time: db.gt(xHourAgoDate),
       app_id: app_id
     })
     // 查询一个时间段的数据用于聚合
-    // .where('createdAt')
+    // .where('time')
     // .gte(new Date('2014-01-01'))
     // .lt(new Date())
     // 开始分组, 分组对象是表达式, 用 $dateToString 操作符将 date 转为年月日形态来分组
     // 
-    .groupBy(db.dateToString({format: '%Y-%m-%d %H:00:00 +08', date: '$createdAt', timezone: '+08'}))
+    .groupBy(db.dateToString({format: '%Y-%m-%d %H:00:00 +08', date: '$time', timezone: '+08'}))
     .as('dateDay')
     .num()
     .as('num')
